@@ -1,2 +1,85 @@
-
 @import "tailwindcss";
+
+/*
+  Design tokens read from the Figma file (it defines no Figma variables, so
+  these are the raw values used by its nodes).
+*/
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-blue: #2f5bff;
+  --color-brand-violet: #7b4dff;
+
+  --color-ink: #101828;
+  --color-muted: #667085;
+  --color-subtle: #98a2b3;
+  --color-logo: #7a879b;
+
+  --color-line: #dce3f0;
+  --color-divider: #eef1f5;
+  --color-surface: #f6f8fc;
+  --color-tint: #eef3ff;
+
+  /* Not in Figma (it has no error states): used for form validation messages. */
+  --color-danger: #d92d20;
+
+  --color-accent-orange: #ff9f43;
+  --color-accent-green: #22b573;
+  --color-accent-purple: #8a5cff;
+  --color-star: #f7b500;
+
+  --radius-input: 8px;
+  --radius-button: 10px;
+  --radius-card: 16px;
+
+  --shadow-card: 0 10px 36px rgb(29 42 87 / 0.1);
+  --shadow-soft: 0 10px 18px rgb(29 42 87 / 0.1);
+
+  /* Testimonial slider: the new card slides in while the old one slides out (see TestimonialSlider). */
+  --animate-slide-in-right: slide-in-right 450ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  --animate-slide-out-left: slide-out-left 450ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  --animate-slide-in-left: slide-in-left 450ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  --animate-slide-out-right: slide-out-right 450ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+
+  @keyframes slide-in-right {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes slide-out-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+  @keyframes slide-in-left {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes slide-out-right {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+  }
+
+  --background-image-brand: linear-gradient(90deg, #2f5bff, #7b4dff);
+  --background-image-soft: linear-gradient(90deg, #f2f6ff, #f6f1ff);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Keeps anchor targets from hiding under the sticky header (76px tall on desktop). */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-blue;
+  }
+}
